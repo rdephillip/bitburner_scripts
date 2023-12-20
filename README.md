@@ -11,6 +11,6 @@ I hope this will also inspire other community members to do the same and share t
 - fresh-start bootstrap scripts target a single server. Early game a good target is joesguns. When your hacker level gets up to around 300 you can switch to phantasy. You likely won't be running these anymore when you will be too strong to focus a single target.
 
 ## Running fresh-start bootstrap
--- copy start.js, claim.js, and gwh.js to your scripts in game
--- run start.js [scriptName] [targetName] [firstRun(boolean)]
--- arg3 is optional, defaults to false
+- copy start.js, claim.js, and gwh.js to your scripts in game
+- run start.js [scriptName] [targetName] [firstRun(boolean)]
+- arg3 is optional, defaults to false
