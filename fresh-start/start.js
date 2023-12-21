@@ -23,16 +23,12 @@ export async function main(ns) {
         let freeRAM = ns.getServerMaxRam(server) - ns.getServerUsedRam(server);
         let threadCount = Math.floor(freeRAM / ns.getScriptRam(scriptName));
 
-        if(!ns.scriptRunning(scriptName, server) || forceUpdate) {
-          if (threadCount > 0){
-            ns.exec(scriptName, server, threadCount, targetName);
-          }
-        } else {
+        if(ns.scriptRunning(scriptName, server)) {
           ns.scriptKill(scriptName, server);
-
-          if (threadCount > 0){
+        }
+        
+        if (threadCount > 0){
             ns.exec(scriptName, server, threadCount, targetName);
-          }
         }
       }
       await ns.sleep(0);
