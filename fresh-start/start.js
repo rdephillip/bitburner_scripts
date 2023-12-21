@@ -10,9 +10,9 @@ export async function main(ns) {
 
   let scriptName = ns.args[0];
   let targetName = ns.args[1];
-  let forceUpdate = ((ns.args.length > 2) ? ns.args[2] : "");
+  let forceUpdate = ((ns.args.length > 2) ? ns.args[2].toLowerCase() : "");
 
-  if (ns.args[2] === "restart") {
+  if (ns.args[2] === "restart" || ns.args[2] === "file") {
     restart(ns, scriptName, servers);
   }
 
