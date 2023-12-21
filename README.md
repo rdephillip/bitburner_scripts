@@ -12,5 +12,7 @@ I hope this will also inspire other community members to do the same and share t
 
 ## Running fresh-start bootstrap
 - copy start.js, claim.js, and gwh.js to your scripts in game
-- run start.js [scriptName] [targetName] [firstRun(boolean)]
-- arg3 is optional, defaults to false
+- run start.js [scriptName] [targetName] [runType]
+- arg3 is optional, defaults to "". Options are "restart" or "file"
+  - restart will restart all scripts on all servers with new arguments
+  - file will trigger restart and copy the script file to servers, overwriting if needed
