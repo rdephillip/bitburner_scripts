@@ -35,7 +35,8 @@ export async function main(ns) {
     }
   }
 
-  ns.toast("There are " + totalThreads + " total threads running.", "info", 30000);
+  ns.write("threads.txt", totalThreads, "w");
+  ns.run("hud.js");
 }
 
 function restart(ns, scriptName, servers) {
