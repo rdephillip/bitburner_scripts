@@ -11,7 +11,7 @@ export async function main(ns) {
       ns.toast('Weakening security on ' + server + '.', "warning")
       let secWeakened = await ns.weaken(server);
       ns.toast('Weakened by ' + secWeakened + '.', "success");
-    } else if (ns.getServerMoneyAvailable(server) < ns.getServerMaxMoney(server) && (ns.getServerMaxMoney(server) - estGrowthAmt > estGrowthAmt )) {
+    } else if (ns.getServerMoneyAvailable(server) < ns.getServerMaxMoney(server) && ns.getServerMaxMoney(server) - ns.getServerMoneyAvailable(server) > estGrowthAmt ) {
       ns.toast('Growing funds on ' + server + '.', "warning")
       let moneyInc = await ns.grow(server);
       ns.printf('Funds grew ' + moneyInc + '.', "success")
