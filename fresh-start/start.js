@@ -8,9 +8,9 @@ export async function main(ns) {
   
   servers = ns.read("servers.txt").split("\n");
 
-  let scriptName = ns.args[0];
-  let targetName = ns.args[1];
-  let forceUpdate = ((ns.args.length > 2) ? ns.args[2].toLowerCase() : "");
+  let scriptName = ((ns.args[0]) ? ns.args[0].toLowerCase() : "gwh.js");
+  let targetName = ((ns.args[1]) ? ns.args[1].toLowerCase() : "joesguns");
+  let forceUpdate = ((ns.args[2]) ? ns.args[2].toLowerCase() : "");
 
   if (ns.args[2] === "restart" || ns.args[2] === "file") {
     restart(ns, scriptName, servers);
