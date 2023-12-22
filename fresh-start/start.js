@@ -35,6 +35,7 @@ export async function main(ns) {
     }
   }
 
+  ns.scriptKill("hud.js", "home");
   ns.write("threads.txt", totalThreads, "w");
   ns.run("hud.js");
 }
