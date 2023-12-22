@@ -15,35 +15,35 @@ export async function main(ns) {
       }
     }
     
-    let serverObj = ns.getServer(server);
+    //let serverObj = ns.getServer(server);
     let portsRequired = ns.getServerNumPortsRequired(server);
     let canNuke = true;
 
-    while (serverObj.openPortCount < portsRequired && !ns.hasRootAccess(server) && canNuke) {
+    while (ns.getServer(server).openPortCount < portsRequired && !ns.hasRootAccess(server) && canNuke) {
       if (numPortsPossible < portsRequired) {
         canNuke = false;
         ns.toast("Cannot open sufficient ports on " + server, "error");
-        break;
-      }
-      if(!serverObj.sshPortOpen && ns.fileExists("BruteSSH.exe")){
-        ns.brutessh(server);
-        await ns.sleep(0);
-      }
-      if(!serverObj.ftpPortOpen && ns.fileExists("FTPCrack.exe")){
-        ns.ftpcrack(server);
-        await ns.sleep(0);
-      }
-      if(!serverObj.smtpPortOpen && ns.fileExists("relaySMTP.exe")){
-        ns.relaysmtp(server);
-        await ns.sleep(0);
-      }
-      if(!serverObj.httpPortOpen && ns.fileExists("HTTPWorm.exe")){
-        ns.httpworm(server);
-        await ns.sleep(0);
-      }
-      if(!serverObj.sqlPortOpen && ns.fileExists("SQLInject.exe")){
-        ns.sqlinject(server);
-        await ns.sleep(0);
+      } else {
+        if(!ns.getServer(server).sshPortOpen && ns.fileExists("BruteSSH.exe")){
+          ns.brutessh(server);
+          await ns.sleep(0);
+        }
+        if(!ns.getServer(server).ftpPortOpen && ns.fileExists("FTPCrack.exe")){
+          ns.ftpcrack(server);
+          await ns.sleep(0);
+        }
+        if(!ns.getServer(server).smtpPortOpen && ns.fileExists("relaySMTP.exe")){
+          ns.relaysmtp(server);
+          await ns.sleep(0);
+        }
+        if(!ns.getServer(server).httpPortOpen && ns.fileExists("HTTPWorm.exe")){
+          ns.httpworm(server);
+          await ns.sleep(0);
+        }
+        if(!ns.getServer(server).sqlPortOpen && ns.fileExists("SQLInject.exe")){
+          ns.sqlinject(server);
+          await ns.sleep(0);
+        }
       }
     }
 
