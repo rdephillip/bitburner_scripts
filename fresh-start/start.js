@@ -1,12 +1,12 @@
 /** @param {NS} ns */
 export async function main(ns) {
   let servers = [];
-
-  if (!ns.fileExists("servers.txt")){
-    ns.run("claim.js");
-  }
   
-  servers = ns.read("servers.txt").split("\n");
+  ns.run("claim.js");
+  
+  if (ns.fileExists("servers.txt")) {
+    servers = ns.read("servers.txt").split("\n");
+  }
 
   let scriptName = ((ns.args[0]) ? ns.args[0].toLowerCase() : "gwh.js");
   let targetName = ((ns.args[1]) ? ns.args[1].toLowerCase() : "joesguns");
