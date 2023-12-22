@@ -58,6 +58,7 @@ export async function main(ns) {
       ns.toast("Cannot gain root access to " + server, "error");
     }
 
+    canNuke = true;
     ns.write("servers.txt", server + "\n", "a");
     await ns.sleep(0);
   }
