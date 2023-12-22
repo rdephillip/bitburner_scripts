@@ -19,7 +19,7 @@ export async function main(ns) {
     let portsRequired = ns.getServerNumPortsRequired(server);
     let canNuke = true;
 
-    while (serverObj.openPortCount < portsRequired && !ns.hasRootAccess(server)) {
+    while (serverObj.openPortCount < portsRequired && !ns.hasRootAccess(server) && canNuke) {
       if (numPortsPossible < portsRequired) {
         canNuke = false;
         ns.toast("Cannot open sufficient ports on " + server, "error");
