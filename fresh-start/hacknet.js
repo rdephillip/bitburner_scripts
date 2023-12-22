@@ -1,11 +1,22 @@
 /** @param {NS} ns */
 export async function main(ns) {
   let isDone = false;
+  let myMax = 25;
 
   while (!isDone) {
-    if (ns.hacknet.numNodes() < ns.hacknet.maxNumNodes()) {
+    if (ns.hacknet.numNodes() < myMax) {
       if (ns.getPlayer().money > ns.hacknet.getPurchaseNodeCost()) {
         ns.hacknet.purchaseNode();
+      }
+    } else {
+      for(let i = 0; i < ns.hacknet.numNodes(); i++){
+        let node = ns.hacknet.getNodeStats(i);
+        if (node.ram === 64 && node.cores === 16 && node.level === 200){
+          isDone = true;
+        } else {
+          isDone = false;
+          break;
+        }
       }
     }
 
@@ -37,20 +48,8 @@ export async function main(ns) {
           ns.hacknet.upgradeLevel(i, 10);
         } else if (ns.getPlayer().money > ns.hacknet.getLevelUpgradeCost(i, 5) && node.level >= 5) {
           ns.hacknet.upgradeLevel(i, 5);
-        } else if (ns.getPlayer().money > ns.hacknet.getLevelUpgradeCost(i, 1) && node.level >= 1) {
+        } else if (ns.getPlayer().money > ns.hacknet.getLevelUpgradeCost(i, 1) && node.level > 1) {
           ns.hacknet.upgradeLevel(i, 1);
-        }
-      }
-    }
-
-    if (ns.hacknet.numNodes() === ns.hacknet.maxNumNodes()) {
-      for(let i = 0; i < ns.hacknet.numNodes(); i++){
-        let node = ns.hacknet.getNodeStats(i);
-        if (node.ram === 64 && node.cores === 16 && node.level === 200){
-          isDone = true;
-        } else {
-          isDone = false;
-          break;
         }
       }
     }
