@@ -1,6 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
   let servers = [];
+  let totalThreads = 0;
   
   ns.run("claim.js");
   
@@ -26,12 +27,15 @@ export async function main(ns) {
 
         let freeRAM = ns.getServerMaxRam(server) - ns.getServerUsedRam(server);
         let threadCount = Math.floor(freeRAM / ns.getScriptRam(scriptName));
+        totalThreads += threadCount;
         
         start(ns, scriptName, server, threadCount, targetName);
       }
       await ns.sleep(0);
     }
   }
+
+  ns.toast("There are " + totalThreads + " total threads running.", "info", 30000);
 }
 
 function restart(ns, scriptName, servers) {
