@@ -45,7 +45,9 @@ function restart(ns, scriptName, servers) {
 
 function start(ns, scriptName, server, threadCount, targetName) {
   if (threadCount > 0) {
-    ns.exec(scriptName, server, threadCount, targetName);
+    ns.exec(scriptName, server, threadCount, targetName, threadCount);
     ns.toast("Started " + scriptName + " on " + server, "success");
+  } else {
+    ns.toast("Insufficient RAM for " + scriptName + " on " + server, "error");
   }
 }
