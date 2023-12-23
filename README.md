@@ -3,6 +3,8 @@ This is a collection of scripts I'm writing for Bitburner. As Discord has charac
 
 I hope this will also inspire other community members to do the same and share their products with each other in an effort to grow and learn together.
 
+Note: I know these are not optimized, or necessarily even best practice. This is me poking at the code on occassion. There are other repos you can review if you want to go for the hyper min/max systems, but these are all scripts I've written without looking at anything more than the game and JavaScript documentation.
+
 ## Notes
 - start.js makes a call to claim.js and also copies gwh.js. These are hardcoded and would need to be changed to match your file names if they differ
 - claim.js will find all servers and attempt to capture them. If you do not have the exe's to open ports it will fail. This does not currently run automatically again with the 3 files in the "bootstrap folder"
