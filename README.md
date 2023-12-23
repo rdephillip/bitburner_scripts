@@ -16,3 +16,15 @@ I hope this will also inspire other community members to do the same and share t
 - arg3 is optional, defaults to "". Options are "restart" or "file"
   - restart will restart all scripts on all servers with new arguments
   - file will trigger restart and copy the script file to servers, overwriting if needed
+
+## The novice-kit
+- This is a more advanced script that will do quite a bit of work for you
+- You will want to acquire all the exe's as quickly as possible
+  - I suggest working for the Tech company long enough to get the $200k for the Tor
+- Depending upon your build this can outpace you very quickly
+  - I'll be building a better hacking system using a WGWH batching system to wrap up this kit
+- I advise setting up aliases
+
+## Other tools
+- srvVal.js will help you evaluate the ideal server for you to attack
+- delsrv.js cleans up your purchased servers in case something went horribly wrong
