@@ -15,7 +15,7 @@ export async function main(ns) {
       values.push(ns.formatNumber(ns.getTotalScriptExpGain(), 2, 1000) + '/sec');
       
       headers.push("Threads");
-      values.push(ns.read("threads.txt"));
+      values.push(ns.formatNumber(ns.read("threads.txt")));
 
       headers.push("Servers");
       values.push(ns.getPurchasedServers().length);
@@ -27,11 +27,20 @@ export async function main(ns) {
       headers.push("Target");
       values.push(target);
 
-      headers.push("T Value");
+      headers.push("T Mx Val");
+      values.push("$" + ns.formatNumber(ns.getServerMaxMoney(target), 2));
+
+      headers.push("T Funds");
       values.push("$" + ns.formatNumber(ns.getServerMoneyAvailable(target), 2));
 
       headers.push("T Sec");
       values.push(ns.formatNumber(ns.getServerSecurityLevel(target), 2));
+
+      headers.push("T Min Sec");
+      values.push(ns.formatNumber(ns.getServerMinSecurityLevel(target), 2));
+
+      headers.push("Hack Chance");
+      values.push(ns.formatPercent(ns.hackAnalyzeChance(target), 1));
 
       hook0.innerText = headers.join(" \n");
       hook1.innerText = values.join(" \n");
