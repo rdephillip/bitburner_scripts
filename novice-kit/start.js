@@ -49,6 +49,12 @@ export async function main(ns) {
           }
         }
 
+        if (ns.getServerMaxMoney(server) > 0) {
+          targetName = server;
+        } else {
+          targetName = ns.args[1];
+        }
+
         let threadCount = Math.floor(freeRAM / ns.getScriptRam(scriptName));
         totalThreads += threadCount;
         
