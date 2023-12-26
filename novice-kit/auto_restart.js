@@ -17,7 +17,6 @@ export async function main(ns) {
   while (ownedProgs.length < programs.length) {
     for (let p in programs) {
       if (ns.fileExists(p) && !ownedProgs.includes(p)){
-        ownedProgs.push(p);
         ns.exec("start.js", setArgs[0], setArgs[1], "restart");
       }
       await ns.sleep(0);
