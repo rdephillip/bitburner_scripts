@@ -9,7 +9,6 @@ export async function main(ns) {
   }
 
   for (let p of programs) {
-    ns.tprint(p);
     if (ns.fileExists(p) && !ownedProgs.includes(p)){
       ownedProgs.push(p);
     }
