@@ -49,7 +49,7 @@ export async function main(ns) {
           }
         }
 
-        if (ns.getServerMaxMoney(server) > 0) {
+        if (ns.getServerMaxMoney(server) > 0 && ns.hasRootAccess(server)) {
           targetName = server;
         } else {
           targetName = ns.args[1];
