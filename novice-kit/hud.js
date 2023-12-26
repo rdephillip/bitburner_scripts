@@ -21,7 +21,7 @@ export async function main(ns) {
       values.push(ns.getPurchasedServers().length);
 
       headers.push("Srv Ram");
-      values.push(ns.formatRam(ns.getServerMaxRam(ns.getPurchasedServers()[0])));
+      values.push(ns.formatRam(ns.getPurchasedServers()[0] ? ns.getServerMaxRam(ns.getPurchasedServers()[0]) : "0"));
 
       let target = ns.read("args.txt").split("\n")[1];
       headers.push("Target");
