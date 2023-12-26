@@ -5,13 +5,14 @@ export async function main(ns) {
   let myServerPrefix = "barb-";
   let myScripts = [
     "hud.js",
+    "auto_restart.js",
     "claim.js",
     "hacknet.js",
     "cluster.js"
   ]
   
   ns.tprint("Launching claim.js");
-  ns.run("claim.js", 1, myServerPrefix);
+  ns.run(myScripts[2], 1, myServerPrefix);
   
   if (ns.fileExists("servers.txt")) {
     servers = ns.read("servers.txt").split("\n");
@@ -30,7 +31,7 @@ export async function main(ns) {
   ns.write("args.txt", scriptName + "\n" + targetName, "w");
 
   if (ns.args[2] === "restart" || ns.args[2] === "file") {
-    restart(ns, scriptName, servers);
+    restart(ns, scriptName, servers, myScripts);
   }
 
   for (let server of servers) {
@@ -66,10 +67,11 @@ export async function main(ns) {
   
   ns.write("threads.txt", totalThreads, "w");
   ns.tprint("Launching hud.js");
-  ns.run("hud.js");  
+  ns.run(myScripts[0]);  
+  ns.run(myScripts[1])
 }
 
-function restart(ns, scriptName, servers) {
+function restart(ns, scriptName, servers, myScripts) {
   for (let server of servers) {
     if (server) {
       ns.scriptKill(scriptName, server);
@@ -88,16 +90,10 @@ function restart(ns, scriptName, servers) {
     ns.scriptKill(scriptName, "home");
   }
 
-  if (ns.scriptRunning("hud.js", "home")) {
-    ns.scriptKill("hud.js", "home");
-  }
-
-  if (ns.scriptRunning("hacknet.js", "home")) {
-    ns.scriptKill("hacknet.js", "home");
-  }
-
-  if (ns.scriptRunning("cluster.js", "home")) {
-    ns.scriptKill("cluster.js", "home");
+  for(let script of myScripts) {
+    if (ns.scriptRunning(script, "home")) {
+      ns.scriptKill(script, "home");
+    }
   }
 }
 
