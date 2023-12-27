@@ -73,7 +73,9 @@ function restart(ns, scriptName, servers, myScripts) {
     if (server) {
       if (ns.scriptRunning(scriptName, server)) {
         ns.scriptKill(scriptName, server);
-        ns.toast("Killed " + scriptName + " on " + server, "error");
+        ns.toast("Killed " + scriptName + " on " + server, "success");
+      } else {
+        ns.toast("No script " + scriptName + " on " + server, "error");
       }
     }
   }
@@ -81,6 +83,9 @@ function restart(ns, scriptName, servers, myScripts) {
   for(let script of myScripts) {
     if (ns.scriptRunning(script, "home")) {
       ns.scriptKill(script, "home");
+      ns.toast("Killed " + script + " on home", "success");
+    } else {
+      ns.toast("No script " + script + " on home", "error");
     }
   }
 }
