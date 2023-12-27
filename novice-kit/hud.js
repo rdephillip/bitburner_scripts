@@ -9,10 +9,10 @@ export async function main(ns) {
       const values = [];
       
       headers.push("Income");
-      values.push('$' + ns.formatNumber(ns.getTotalScriptIncome()[0], 2, 1000) + '/sec');
+      values.push('$' + ns.formatNumber(ns.getTotalScriptIncome()[0], 2, 1000) + '/s');
 
       headers.push("Exp");
-      values.push(ns.formatNumber(ns.getTotalScriptExpGain(), 2, 1000) + '/sec');
+      values.push(ns.formatNumber(ns.getTotalScriptExpGain(), 2, 1000) + '/s');
       
       headers.push("Threads");
       values.push(ns.formatNumber(ns.read("threads.txt")));
@@ -22,6 +22,10 @@ export async function main(ns) {
 
       headers.push("Srv Ram");
       values.push(ns.formatRam(ns.getPurchasedServers()[0] ? ns.getServerMaxRam(ns.getPurchasedServers()[0]) : "0"));
+
+      let nextSrv = ns.fileExists("purSrv.txt") ? "$" + ns.formatNumber(parseFloat(ns.read("purSrv.txt").split("\n")[0]), 2): "N/A";
+      headers.push("Next Srv");
+      values.push(nextSrv);
 
       let target = ns.read("args.txt").split("\n")[1];
       headers.push("Target");
