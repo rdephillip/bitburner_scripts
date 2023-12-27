@@ -25,7 +25,7 @@ export async function main(ns) {
   }
   
   // launch claim > hacknet > cluster chain
-  ns.tprint("Launching claim.js");
+  ns.tprint("Launching " + ns.args[2]);
   ns.run(myScripts[2], 1, myServerPrefix);
 
   servers = srvList(ns);
@@ -46,7 +46,7 @@ export async function main(ns) {
           }
         }
 
-        if (ns.getServerMaxMoney(server) > 0 && ns.hasRootAccess(server)) {
+        if (ns.getServerMaxMoney(server) > 0 && ns.hasRootAccess(server) && ns.getHackingLevel() >= ns.getServerRequiredHackingLevel(server)) {
           targetName = server;
         } else {
           targetName = ns.args[1];
@@ -62,8 +62,9 @@ export async function main(ns) {
   }
   
   ns.write("threads.txt", totalThreads, "w");
-  ns.tprint("Launching hud.js");
-  ns.run(myScripts[0]);  
+  ns.tprint("Launching " + ns.args[0]);
+  ns.run(myScripts[0]);
+  ns.tprint("Launching " + ns.args[1]);
   ns.run(myScripts[1])
 }
 
@@ -76,21 +77,6 @@ function restart(ns, scriptName, servers, myScripts) {
       }
     }
   }
-
-  /*for (let server of ns.getPurchasedServers()){
-    if (server){
-      if (ns.scriptRunning(scriptName, server)) {
-        ns.scriptKill(scriptName, server)
-        ns.toast("Killed " + scriptName + " on " + server, "error");
-      }
-    }
-  }
-
-  if (ns.scriptRunning(scriptName, "home")) {
-    if (ns.scriptRunning(scriptName, "home")) {
-      ns.scriptKill(scriptName, "home");
-    }
-  }*/
 
   for(let script of myScripts) {
     if (ns.scriptRunning(script, "home")) {
