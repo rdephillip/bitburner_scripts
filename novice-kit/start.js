@@ -52,7 +52,7 @@ export async function main(ns) {
           targetName = ns.args[1];
         }
 
-        let threadCount = Math.floor(Math.ceil(freeRAM) / ns.getScriptRam(scriptName));
+        let threadCount = Math.floor(freeRAM / ns.getScriptRam(scriptName));
         totalThreads += threadCount;
         
         start(ns, scriptName, server, threadCount, targetName);
