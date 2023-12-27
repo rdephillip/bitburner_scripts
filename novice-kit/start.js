@@ -25,7 +25,7 @@ export async function main(ns) {
   }
   
   // launch claim > hacknet > cluster chain
-  ns.tprint("Launching " + ns.args[2]);
+  ns.tprint("Launching " + myScripts[2]);
   ns.run(myScripts[2], 1, myServerPrefix);
 
   servers = srvList(ns);
@@ -62,9 +62,9 @@ export async function main(ns) {
   }
   
   ns.write("threads.txt", totalThreads, "w");
-  ns.tprint("Launching " + ns.args[0]);
+  ns.tprint("Launching " + myScripts[0]);
   ns.run(myScripts[0]);
-  ns.tprint("Launching " + ns.args[1]);
+  ns.tprint("Launching " + myScripts[1]);
   ns.run(myScripts[1])
 }
 
