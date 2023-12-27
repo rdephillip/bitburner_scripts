@@ -10,6 +10,7 @@ export async function main(ns) {
   let targetName = file[1];
 
   while (!maxxed) {
+    ns.write("purSrv.txt", ns.getPurchasedServerCost(2 ** ramMulti) * maxServers + "\n", "w");
     if (ns.getPurchasedServers().length === 0) {
       while (ns.getPlayer().money > ns.getPurchasedServerCost(2 ** ramMulti) * maxServers && 2 ** ramMulti < ns.getPurchasedServerMaxRam()) {
         ramMulti++;
