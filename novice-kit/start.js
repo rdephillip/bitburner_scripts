@@ -1,6 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  let servers = [];
+  let servers = srvList(ns);
   let totalThreads = 0;
   let myServerPrefix = "barb-";
   let myScripts = [
@@ -10,29 +10,25 @@ export async function main(ns) {
     "hacknet.js",
     "cluster.js"
   ]
-  
-  ns.tprint("Launching claim.js");
-  ns.run(myScripts[2], 1, myServerPrefix);
-  
-  if (ns.fileExists("servers.txt")) {
-    servers = ns.read("servers.txt").split("\n");
-  }
 
-  servers.push("home");
-
-  for (let server of ns.getPurchasedServers()) {
-    servers.push(server);
-  }
-
+  // Initialize argument variables
   let scriptName = ((ns.args[0]) ? ns.args[0].toLowerCase() : "gwh.js");
   let targetName = ((ns.args[1]) ? ns.args[1].toLowerCase() : "joesguns");
   let forceUpdate = ((ns.args[2]) ? ns.args[2].toLowerCase() : "");
 
+  // save vars to file for other scripts
   ns.write("args.txt", scriptName + "\n" + targetName, "w");
 
+  // check if restart or file is requested
   if (ns.args[2] === "restart" || ns.args[2] === "file") {
     restart(ns, scriptName, servers, myScripts);
   }
+  
+  // launch claim > hacknet > cluster chain
+  ns.tprint("Launching claim.js");
+  ns.run(myScripts[2], 1, myServerPrefix);
+
+  servers = srvList(ns);
 
   for (let server of servers) {
     if (server){
@@ -56,7 +52,7 @@ export async function main(ns) {
           targetName = ns.args[1];
         }
 
-        let threadCount = Math.floor(freeRAM / ns.getScriptRam(scriptName));
+        let threadCount = Math.floor(Math.ceil(freeRAM) / ns.getScriptRam(scriptName));
         totalThreads += threadCount;
         
         start(ns, scriptName, server, threadCount, targetName);
@@ -74,21 +70,27 @@ export async function main(ns) {
 function restart(ns, scriptName, servers, myScripts) {
   for (let server of servers) {
     if (server) {
-      ns.scriptKill(scriptName, server);
-      ns.toast("Killed " + scriptName + " on " + server, "error");
+      if (ns.scriptRunning(scriptName, server)) {
+        ns.scriptKill(scriptName, server);
+        ns.toast("Killed " + scriptName + " on " + server, "error");
+      }
     }
   }
 
-  for (let server of ns.getPurchasedServers()){
+  /*for (let server of ns.getPurchasedServers()){
     if (server){
-      ns.scriptKill(scriptName, server)
-      ns.toast("Killed " + scriptName + " on " + server, "error");
+      if (ns.scriptRunning(scriptName, server)) {
+        ns.scriptKill(scriptName, server)
+        ns.toast("Killed " + scriptName + " on " + server, "error");
+      }
     }
   }
 
   if (ns.scriptRunning(scriptName, "home")) {
-    ns.scriptKill(scriptName, "home");
-  }
+    if (ns.scriptRunning(scriptName, "home")) {
+      ns.scriptKill(scriptName, "home");
+    }
+  }*/
 
   for(let script of myScripts) {
     if (ns.scriptRunning(script, "home")) {
@@ -104,4 +106,23 @@ function start(ns, scriptName, server, threadCount, targetName) {
   } else {
     ns.toast("Insufficient RAM for " + scriptName + " on " + server, "error");
   }
+}
+
+function srvList(ns) {
+  let servers = [];
+
+  // check for our servers.txt from previous claim and load to array
+  if (ns.fileExists("servers.txt")) {
+    servers = ns.read("servers.txt").split("\n");
+  }
+
+  // add home to the servers array
+  servers.push("home");
+
+  // add purchased servers to server array
+  for (let server of ns.getPurchasedServers()) {
+    servers.push(server);
+  }
+
+  return servers;
 }
