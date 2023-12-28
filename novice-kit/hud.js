@@ -23,7 +23,7 @@ export async function main(ns) {
       headers.push("Srv Ram");
       values.push(ns.formatRam(ns.getPurchasedServers()[0] ? ns.getServerMaxRam(ns.getPurchasedServers()[0]) : "0"));
 
-      let nextSrv = ns.fileExists("purSrv.txt") ? "$" + ns.formatNumber(parseFloat(ns.read("purSrv.txt").split("\n")[0]), 2): "N/A";
+      let nextSrv = ns.fileExists("purSrv.txt") && ns.scriptRunning("cluster.js", "home") ? "$" + ns.formatNumber(parseFloat(ns.read("purSrv.txt").split("\n")[0]), 2) : "N/A";
       headers.push("Next Srv");
       values.push(nextSrv);
 
