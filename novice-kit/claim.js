@@ -12,7 +12,7 @@ export async function main(ns) {
 
   for (let server of servers) {
     for (let s of ns.scan(server)){
-      if (s != "home" && !servers.includes(s)){
+      if (s != "home" && s != "darkweb" && !servers.includes(s)){
         servers.push(s);
         await ns.sleep(0);
       }
