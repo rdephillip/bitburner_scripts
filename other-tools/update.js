@@ -10,7 +10,7 @@ export async function main(ns) {
     "gwh.js"
   ];
 
-  let url = "https://github.com/rdephillip/bitburner_scripts/blob/main/novice-kit/";
+  let url = "https://raw.githubusercontent.com/rdephillip/bitburner_scripts/main/novice-kit/";
 
   for (let script of scripts) {
     ns.wget(url+script, script, "home");
