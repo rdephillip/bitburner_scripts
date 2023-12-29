@@ -30,5 +30,6 @@ Note: I know these are not optimized, or necessarily even best practice. This is
 ## Other tools
 - srvVal.js will help you evaluate the ideal server for you to attack
 - delsrv.js cleans up your purchased servers in case something went horribly wrong
-- fndSrv.js finds a specified server and provides the ant trail to connect to it
+- findSrv.js finds a specified server and provides the ant trail to connect to it
 - update.js Theoretically will retrieve the novice-kit files and write them to your server (note: if files of the same name exist they will be overwritten)
+- findCCT.js Finds all Coding Contracts and tells you the server it is on
