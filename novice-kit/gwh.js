@@ -7,7 +7,7 @@ export async function main(ns) {
   while(true) {
     estGrowthAmt = (ns.getServerMoneyAvailable(server) * (1 + (ns.getServerGrowth(server) / 100)));
     
-    if (ns.getServerSecurityLevel(server) > ns.getServerMinSecurityLevel(server) && Math.floor(ns.weakenAnalyze(threadCount)) > 1){
+    if (ns.getServerSecurityLevel(server) > ns.getServerMinSecurityLevel(server)){
       ns.toast('Weakening security on ' + server + '.', "warning")
       let secWeakened = await ns.weaken(server);
       ns.toast('Weakened by ' + ns.formatNumber(secWeakened, 2) + '.', "success");
